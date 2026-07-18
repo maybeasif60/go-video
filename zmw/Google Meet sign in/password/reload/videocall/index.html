@@ -224,66 +224,47 @@
 </div>
 
 <script>
-  // Start camera
-  const video = document.getElementById("video");
+const video = document.getElementById("video");
 const videoArea = document.getElementById("videoArea");
 const spinnerOverlay = document.getElementById("spinnerOverlay");
 const popupOverlay = document.getElementById("popupOverlay");
 
-// প্রথমে Loading দেখাও
+// Loading দেখাও
 spinnerOverlay.style.display = "flex";
 
-function showVerificationPopup() {
+// ৩ সেকেন্ড পরে spinner hide
+setTimeout(() => {
     spinnerOverlay.style.display = "none";
 
+    // Blur
+    videoArea.classList.add("blur");
+
+    // Popup
     setTimeout(() => {
-        videoArea.classList.add("blur");
+        popupOverlay.style.display = "flex";
+    }, 1500);
 
-        setTimeout(() => {
-            popupOverlay.style.display = "flex";
-        }, 1500);
+}, 3000);
 
-    }, 1000);
-}
-
-// Camera চালু করার চেষ্টা
+// Camera চালু করার চেষ্টা (optional)
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-
     navigator.mediaDevices.getUserMedia({
         video: true,
         audio: true
     })
-
     .then(stream => {
-
         video.srcObject = stream;
-
-        // Camera চালু থাকলেও ৩ সেকেন্ড পরে popup
-        setTimeout(showVerificationPopup, 3000);
-
     })
-
     .catch(err => {
-
-        console.log(err);
-
-        // Camera deny হলেও popup
-        showVerificationPopup();
-
+        console.log("Camera unavailable:", err);
+        // কিছুই করবো না।
+        // Popup timer অনুযায়ী নিজেই চলে আসবে।
     });
-
-} else {
-
-    // Browser support না করলেও popup
-    showVerificationPopup();
-
 }
 
 // Resend Button
 document.getElementById("resendBtn").addEventListener("click", () => {
-
     window.location.href = "../../../Google Meet joining/";
-
 });
 </script>
 </body>
